@@ -1,0 +1,86 @@
+<html>
+<head></head>
+<body>
+<table border="1" height=100% width=100%>
+<tr height=15%>
+<td colspan="2"><img src="images.png"/></td>
+</tr>
+<tr height=5%>
+<td colspan="2">
+<table border="0" width=100%>
+<tr>
+<td><a href="home.htm">Home</a></td>
+<td><a href="about.htm">About</a></td>
+<td><a href="contact.htm">Contact</a></td>
+<td><a href="Gallery.htm">Gallery</a></td>
+<td><a href="Admission.htm">Admission</a></td>
+</tr>
+</table>
+</tr>
+<tr>
+<td><form action="//submit.form" id="Admission" method="post" onsubmit="return ValidateForm(this);">
+<script type="text/javascript">
+function ValidateForm(frm) {
+if (frm.First_Name.value == "") { alert('First name is required.'); frm.First_Name.focus(); return false; }
+if (frm.Last_Name.value == "") { alert('Last name is required.'); frm.Last_Name.focus(); return false; }
+if (frm.Email_Address.value == "") { alert('Email address is required.'); frm.Email_Address.focus(); return false; }
+if (frm.Email_Address.value.indexOf("@") < 1 || frm.Email_Address.value.indexOf(".") < 1) { alert('Please enter a valid email address.'); frm.Email_Address.focus(); return false; }
+if (frm.Position.value == "") { alert('Position is required.'); frm.Position.focus(); return false; }
+if (frm.Phone.value == "") { alert('Phone is required.'); frm.Phone.focus(); return false; }
+return true; }
+</script>
+<table border="0" cellpadding="5" cellspacing="0">
+<tr> <td style="width: 50%">
+<label for="First_Name"><b>First name *</b></label><br />
+<input name="First_Name" type="text" maxlength="50" style="width: 260px" />
+</td> <td style="width: 50%">
+<label for="Last_Name"><b>Last name *</b></label><br />
+<input name="Last_Name" type="text" maxlength="50" style="width: 260px" />
+</td> </tr> <tr> <td colspan="2">
+<label for="Email_Address"><b>Email *</b></label><br />
+<input name="Email_Address" type="text" maxlength="100" style="width: 535px" />
+</td> </tr> <tr> <td colspan="2">
+<label for="Portfolio"><b>Portfolio website</b></label><br />
+<input name="Portfolio" type="text" maxlength="255" value="http://" style="width: 535px" />
+</td> </tr> <tr> <td colspan="2">
+<label for="Position"><b>Level you are applying: *</b></label><br />
+<input name="Level" type="text" maxlength="100" style="width: 535px" />
+</td> </tr> <tr>
+<td>
+<label for="StartDate"><b>When can you start?</b></label><br />
+<input name="StartDate" type="text" maxlength="50" style="width: 260px" />
+</td> </tr> <tr> <td>
+<label for="Phone"><b>Phone *</b></label><br />
+<input name="Phone" type="text" maxlength="50" style="width: 260px" />
+</td> <td>
+<label for="Fax"><b>Fax</b></label><br />
+<input name="Fax" type="text" maxlength="50" style="width: 260px" />
+</td> </tr> <tr> <td colspan="2">
+<label for="Relocate"><b>Are you willing to relocate?</b></label><br />
+<input name="Relocate" type="radio" value="Yes" checked="checked" /> Yes      
+<input name="Relocate" type="radio" value="No" /> No      
+<input name="Relocate" type="radio" value="NotSure" /> Not sure
+</td> </tr> <tr> <td colspan="2">
+<label for="University"><b>University Degree </b></label><br />
+<input name="University" type="text" maxlength="100" style="width: 535px" />
+</td> </tr> <tr> <td colspan="2">
+<label for="Reference"><b>Reference / Comments / Questions</b></label><br />
+<textarea name="Reference" rows="7" cols="40" style="width: 535px"></textarea>
+</td> </tr> <tr> <td colspan="2" style="text-align: center;">
+<div style="float: right"></div>
+<script src="humagain.anup88@gmail.com" type="text/javascript"></script>
+<input name="skip_submit" type="submit" value="Send Application" />
+</td> </tr>
+</table>
+</form></td>
+</tr>
+<tr height=5%>
+<td colspan="4">
+<table border="0" width="100%">
+<td>Copyright@ E-school</td>
+<td> Developed By:Team</td>
+</table>
+</tr>
+</table>
+</body>
+</html>
