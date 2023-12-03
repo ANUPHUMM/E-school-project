@@ -1,44 +1,32 @@
-def gv
-
+eclarative Pipeline)
 pipeline {
-    agent any
-    parameters {
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'], description: '')
-        booleanParam(name: 'executeTests', defaultValue: true, description: '')
+  agent any  
+  options {
+    // Keep the 10 most recent builds
+    buildDiscarder(logRotator(numToKeepStr:'10')) 
+  }
+  stages {
+    stage ('Build') { 
+      steps {
+        // install required gems
+        sh 'bundle install'
+
+        // build and run tests with coverage
+        sh 'bundle exec rake build spec'
+
+        // Archive the built artifacts
+        archive includes: 'pkg/*.gem'
+
+        // publish html
+        publishHTML target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: 'coverage',
+            reportFiles: 'index.html',
+            reportName: 'RCov Report'
+          ]
+      }
     }
-    stages {
-        stage("init") {
-            steps {
-                script {
-                   gv = load "script.groovy" 
-                }
-            }
-        }
-        stage("build") {
-            steps {
-                script {
-                    gv.buildApp()
-                }
-            }
-        }
-        stage("test") {
-            when {
-                expression {
-                    params.executeTests
-                }
-            }
-            steps {
-                script {
-                    gv.testApp()
-                }
-            }
-        }
-        stage("deploy") {
-            steps {
-                script {
-                    gv.deployApp()
-                }
-            }
-        }
-    }   
+  }
 }
