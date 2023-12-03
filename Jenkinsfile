@@ -1,4 +1,3 @@
-eclarative Pipeline)
 pipeline {
   agent any  
   options {
