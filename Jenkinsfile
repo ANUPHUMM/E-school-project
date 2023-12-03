@@ -10,6 +10,11 @@ pipeline {
       steps {
         // install required gems
         sh 'bundle install'
+
+           stage ('TEST') { 
+      steps {
+        // install required gems
+        sh 'bundle TEST'
         // publish html
         publishHTML target: [
             allowMissing: false,
@@ -20,6 +25,7 @@ pipeline {
             reportName: 'RCov Report'
           ]
       }
+    }
     }
   }
 }
