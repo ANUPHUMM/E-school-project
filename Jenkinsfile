@@ -4,12 +4,6 @@ pipeline {
     stages {
         stage('Clone sources') {
             steps {
-                git url: 'pipeline {
-    agent any
-
-    stages {
-        stage('Clone sources') {
-            steps {
                 git url: 'https://github.com/ANUPHUMM/E-school-project.git'
             }
         }
