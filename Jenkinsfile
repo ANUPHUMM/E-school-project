@@ -5,6 +5,7 @@ pipeline {
         SONARQUBE_URL = 'http://10.13.194.105:9000' // Replace with your SonarQube server URL
         SONARQUBE_TOKEN = 'test' // Replace with your SonarQube access token
         GIT_REPO_URL = 'https://github.com/ANUPHUMM/E-school-project.git' // Replace with your GitHub repository URL
+        SONAR_SCANNER_PATH = "${SCANNER_HOME}/bin/sonar-scanner"
     }
 
     stages {
@@ -19,7 +20,7 @@ pipeline {
                 script {
                     withSonarQubeEnv('sonartest') {
                         // Run SonarQube analysis
-                        sh "sonar-scanner \
+                        sh "${SONAR_SCANNER_PATH} \
                             -Dsonar.host.url=${SONARQUBE_URL} \
                             -Dsonar.projectKey=E-school-project \
                             -Dsonar.sources=css \
