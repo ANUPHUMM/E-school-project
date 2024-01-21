@@ -5,7 +5,7 @@ pipeline {
         SONARQUBE_URL = 'http://10.13.194.105:9000'
         SONARQUBE_TOKEN = 'test'
         GIT_REPO_URL = 'https://github.com/ANUPHUMM/E-school-project.git'
-        SONAR_SCANNER_PATH = '/root/sonarscanner/sonar-scanner-4.6.0.2311-linux/bin' // Replace with the actual path
+        SONAR_SCANNER_PATH = '/var/jenkins_home/sonar-scanner/sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner' // Replace with the actual path
     }
 
     stages {
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh 'echo "PATH: ${PATH}"'
                 sh 'which sonar-scanner'
-                sh 'ls -l /root/sonarscanner/sonar-scanner-4.6.0.2311-linux/bin' // Replace with the actual path
+                sh 'ls -l /var/jenkins_home/sonar-scanner/sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner' // Replace with the actual path
             }
         }
 
