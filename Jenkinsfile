@@ -16,8 +16,9 @@ pipeline {
 
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv(credentialsId: 'test', installationName: 'sonarqubetest') { 
-                       sh "./mvnw clean verify -DskipTests=true sonar:sonar -Dsonar.projectKey=$SONAR_PROJECT_KEY"
+                withSonarQubeEnv(credentialsId: 'test', installationName: 'sonarqubetest') {
+                    sh './mvn -N io maven:sonar'
+                    sh "./mvnw clean verify -DskipTests=true sonar:sonar -Dsonar.projectKey=$SONAR_PROJECT_KEY"
                 }
             }
         }
