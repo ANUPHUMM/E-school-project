@@ -2,12 +2,21 @@ pipeline {
     agent any
 
     environment {
-        SONARQUBE_URL = 'http://10.13.194.105:9000' // Replace with your SonarQube server URL
-        SONARQUBE_TOKEN = 'test' // Replace with your SonarQube access token
-        GIT_REPO_URL = 'https://github.com/ANUPHUMM/E-school-project.git' // Replace with your GitHub repository URL
+        SONARQUBE_URL = 'http://10.13.194.105:9000'
+        SONARQUBE_TOKEN = 'test'
+        GIT_REPO_URL = 'https://github.com/ANUPHUMM/E-school-project.git'
+        SONAR_SCANNER_PATH = '/path/to/sonar-scanner' // Replace with the actual path
     }
 
     stages {
+        stage('Debug') {
+            steps {
+                sh 'echo "PATH: ${PATH}"'
+                sh 'which sonar-scanner'
+                sh 'ls -l /path/to/sonar-scanner' // Replace with the actual path
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -17,9 +26,8 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('sonartest') {
-                        // Run SonarQube analysis
-                        sh "sonar-scanner \
+                    dir("${WORKSPACE}") {
+                        sh "${SONAR_SCANNER_PATH} \
                             -Dsonar.host.url=${SONARQUBE_URL} \
                             -Dsonar.projectKey=E-school-project \
                             -Dsonar.sources=css \
