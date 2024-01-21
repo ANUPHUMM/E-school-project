@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'maventest'
+        jdk 'jdk17.0.10'
     }
     environment {
         SONAR_PROJECT_KEY = 'test'
