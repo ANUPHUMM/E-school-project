@@ -17,9 +17,9 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    withSonarQubeEnv('SonarQube') {
+                    withSonarQubeEnv('sonarqubetest') {
                         // Run SonarQube analysis
-                        sh "sonarqubetest \
+                        sh "sonar-scanner \
                             -Dsonar.host.url=${SONARQUBE_URL} \
                             -Dsonar.projectKey=E-school-project \
                             -Dsonar.sources=css \
