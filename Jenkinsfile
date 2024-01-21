@@ -1,25 +1,40 @@
 pipeline {
     agent any
-    tools {
-        maven 'maven_3.8.5'
-    }
+
     environment {
-        SONAR_PROJECT_KEY = 'test'
-    } 
+        SONARQUBE_URL = 'http://10.13.194.105:9000' // Replace with your SonarQube server URL
+        SONARQUBE_TOKEN = 'sonarqubetest' // Replace with your SonarQube access token
+        GIT_REPO_URL = 'https://github.com/ANUPHUMM/E-school-project.git' // Replace with your GitHub repository URL
+    }
+
     stages {
-        stage('Clone sources') {
+        stage('Checkout') {
             steps {
-                git url: 'https://github.com/ANUPHUMM/E-school-project.git'
+                checkout scm
             }
         }
 
-        stage('SonarQube analysis') {
+        stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv(credentialsId: 'test', installationName: 'sonarqubetest') {
-                    sh './mvn -N io maven:sonar'
-                    sh "./mvnw clean verify -DskipTests=true sonar:sonar -Dsonar.projectKey=$SONAR_PROJECT_KEY"
+                script {
+                    withSonarQubeEnv('SonarQube') {
+                        // Run SonarQube analysis
+                        sh "sonar-scanner \
+                            -Dsonar.host.url=${SONARQUBE_URL} \
+                            -Dsonar.projectKey=E-school-project \
+                            -Dsonar.sources=stylesheets \
+                            -Dsonar.login=${SONARQUBE_TOKEN} \
+                            -Dsonar.links.homepage=${GIT_REPO_URL}"
+                    }
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            // Clean up workspace and other post-build tasks
+            cleanWs()
         }
     }
 }
