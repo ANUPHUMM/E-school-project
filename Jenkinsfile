@@ -19,10 +19,10 @@ pipeline {
                 script {
                     withSonarQubeEnv('SonarQube') {
                         // Run SonarQube analysis
-                        sh "sonar-scanner \
+                        sh "sonarqubetest \
                             -Dsonar.host.url=${SONARQUBE_URL} \
                             -Dsonar.projectKey=E-school-project \
-                            -Dsonar.sources=stylesheets \
+                            -Dsonar.sources=css \
                             -Dsonar.login=${SONARQUBE_TOKEN} \
                             -Dsonar.links.homepage=${GIT_REPO_URL}"
                     }
