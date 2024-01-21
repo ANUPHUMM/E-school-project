@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    
+    environment {
+        SONAR_PROJECT_KEY = 'test'
+    } 
     stages {
         stage('Clone sources') {
             steps {
@@ -10,14 +13,9 @@ pipeline {
 
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('sonarqubetest') {
-                    echo 'test'
+                withSonarQubeEnv(credentialsId: 'test', installationName: 'sonarqubetest') { 
+                       sh "./mvnw clean verify -DskipTests=true sonar:sonar -Dsonar.projectKey=$SONAR_PROJECT_KEY"
                 }
-            }
-        }
-        stage("Quality gate") {
-            steps {
-                echo 'test'
             }
         }
     }
