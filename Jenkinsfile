@@ -2,21 +2,10 @@ pipeline {
     agent any
 
     environment {
-        SONARQUBE_URL = 'http://10.13.194.105:9000'
-        SONARQUBE_TOKEN = 'test'
-        GIT_REPO_URL = 'https://github.com/ANUPHUMM/E-school-project.git'
-        SONAR_SCANNER_PATH = '/var/jenkins_home/sonar-scanner/sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner' // Replace with the actual path
+        SONARQUBE_SCANNER_HOME = tool 'SonarQubeScanner'
     }
 
     stages {
-        stage('Debug') {
-            steps {
-                sh 'echo "PATH: ${PATH}"'
-                sh 'which sonar-scanner'
-                sh 'ls -l /var/jenkins_home/sonar-scanner/sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner' // Replace with the actual path
-            }
-        }
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -25,15 +14,10 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                script {
-                    dir("${WORKSPACE}") {
-                        sh "${SONAR_SCANNER_PATH} \
-                            -Dsonar.host.url=${SONARQUBE_URL} \
-                            -Dsonar.projectKey=E-school-project \
-                            -Dsonar.sources=css \
-                            -Dsonar.login=${SONARQUBE_TOKEN} \
-                            -Dsonar.links.homepage=${GIT_REPO_URL}"
-                    }
+                withSonarQubeEnv('sonartest') {
+                    sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner \
+                        -Dsonar.projectKey=E-school-project \
+                        -Dsonar.sources=css"
                 }
             }
         }
@@ -41,7 +25,6 @@ pipeline {
 
     post {
         always {
-            // Clean up workspace and other post-build tasks
             cleanWs()
         }
     }
