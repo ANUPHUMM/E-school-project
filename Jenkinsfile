@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SONARQUBE_URL = 'http://10.13.194.105:9000' // Replace with your SonarQube server URL
-        SONARQUBE_TOKEN = 'sonartest' // Replace with your SonarQube access token
+        SONARQUBE_TOKEN = 'test' // Replace with your SonarQube access token
         GIT_REPO_URL = 'https://github.com/ANUPHUMM/E-school-project.git' // Replace with your GitHub repository URL
     }
 
