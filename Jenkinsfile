@@ -14,7 +14,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('sonartest') {
+                withSonarQubeEnv('sonar') {
                     sh "${SONARQUBE_SCANNER_HOME}/bin/sonar-scanner \
                         -Dsonar.projectKey=E-school-project \
                         -Dsonar.sources=css"
